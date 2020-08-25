@@ -8,13 +8,16 @@ namespace GuessingGame
         {
             for (int i = 1; i <= 4; i++)
             {
+                Console.WriteLine($"Your Guess ({i})>");
                 Console.WriteLine("Guess the Secret Number!");
                 string userGuess = Console.ReadLine();
-                CheckGuess(userGuess);
+                bool correctGuess = CheckGuess(userGuess);
+                if (correctGuess)
+                    break;
             }
         }
 
-        static void CheckGuess(string guess)
+        static bool CheckGuess(string guess)
         {
             int userNumber = Convert.ToInt32(guess);
             int theAnswer = 42;
@@ -22,10 +25,12 @@ namespace GuessingGame
             if (userNumber == theAnswer)
             {
                 Console.WriteLine("That is correct! You win!");
+                return true;
             }
             else
             {
                 Console.WriteLine("Incorrect! Try better!");
+                return false;
             }
 
         }
