@@ -8,7 +8,22 @@ namespace GuessingGame
         {
             Console.WriteLine("Guess the Secret Number!");
             string userGuess = Console.ReadLine();
-            Console.WriteLine(userGuess);
+            CheckGuess(userGuess);
+        }
+
+        static void CheckGuess(string guess)
+        {
+            int userNumber = Convert.ToInt32(guess);
+            int theAnswer = 42;
+            if (userNumber == theAnswer)
+            {
+                Console.WriteLine("That is correct! You win!");
+            }
+            else
+            {
+                Console.WriteLine("Incorrect! You lose, you loser!");
+            }
+
         }
     }
 }
