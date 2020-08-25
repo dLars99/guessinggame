@@ -28,7 +28,14 @@ namespace GuessingGame
                 bool gameWon = false;
                 for (int i = 0; i < numOfGuesses; i++)
                 {
-                    Console.Write($"{numOfGuesses - i} guesses left!  ");
+                    if (numOfGuesses - i > 1)
+                    {
+                        Console.Write($"{numOfGuesses - i} guesses left!  ");
+                    }
+                    else
+                    {
+                        Console.Write("Oh no! 1 guess left!  ");
+                    }
 
                     gameWon = CheckGuess(theAnswer);
                     if (gameWon)
