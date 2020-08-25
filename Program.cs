@@ -25,13 +25,23 @@ namespace GuessingGame
             else
             {
                 // Regular mode - limited guesses
+                bool gameWon = false;
                 for (int i = 0; i < numOfGuesses; i++)
                 {
                     Console.Write($"{numOfGuesses - i} guesses left!  ");
 
-                    bool gameWon = CheckGuess(theAnswer);
+                    gameWon = CheckGuess(theAnswer);
                     if (gameWon)
                         break;
+                }
+
+                if (!gameWon)
+                {
+                    Console.Clear();
+                    Console.WriteLine("You are out of guesses!");
+                    Console.WriteLine($"The Secret Number was {theAnswer}");
+                    Console.WriteLine();
+                    Console.WriteLine("Better luck next time!");
                 }
             }
 
