@@ -9,8 +9,8 @@ namespace GuessingGame
             int theAnswer = new Random().Next(1, 100);
             int numOfGuesses = ChooseDifficulty();
             Console.Clear();
-            Console.WriteLine("Guess the Secret Number!");
-            Console.WriteLine("------------------------");
+            Console.WriteLine("Guess the Secret Number from 1 to 100!");
+            Console.WriteLine("--------------------------------------");
 
             if (numOfGuesses == 100)
             {
@@ -25,13 +25,23 @@ namespace GuessingGame
             else
             {
                 // Regular mode - limited guesses
+                bool gameWon = false;
                 for (int i = 0; i < numOfGuesses; i++)
                 {
                     Console.Write($"{numOfGuesses - i} guesses left!  ");
 
-                    bool gameWon = CheckGuess(theAnswer);
+                    gameWon = CheckGuess(theAnswer);
                     if (gameWon)
                         break;
+                }
+
+                if (!gameWon)
+                {
+                    Console.Clear();
+                    Console.WriteLine("You are out of guesses!");
+                    Console.WriteLine($"The Secret Number was {theAnswer}");
+                    Console.WriteLine();
+                    Console.WriteLine("Better luck next time!");
                 }
             }
 
@@ -77,7 +87,12 @@ namespace GuessingGame
             static bool CheckGuess(int answer)
             {
                 string userGuess = Console.ReadLine();
-                int userNumber = Convert.ToInt32(userGuess);
+                int userNumber;
+                if (!int.TryParse(userGuess, out userNumber))
+                {
+                    Console.WriteLine("Not a number!");
+                    return false;
+                }
 
                 if (userNumber == answer)
                 {
